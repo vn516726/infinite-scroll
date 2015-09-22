@@ -42,7 +42,8 @@
             msgText: '<em>Loading the next set of posts...</em>',
             selector: null,
             speed: 'fast',
-            start: undefined
+            start: undefined,
+            disableLoadingEnd: false // if true, user should call loading.finished() on his own
         },
         state: {
             isDuringAjax: false,
@@ -387,7 +388,8 @@
             }
 
             // loadingEnd function
-            opts.loading.finished.call($(opts.contentSelector)[0],opts);
+            if(!opts.loading.disableLoadingEnd)
+                opts.loading.finished.call($(opts.contentSelector)[0],opts);
 
             // smooth scroll to ease in the new content
             if (opts.animate) {
